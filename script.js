@@ -16,3 +16,11 @@ app.get('/usuarios', (req, res) => {
         res.json(resultados);
     });
 });
+
+app.get('/usuario/:dni', (req, res) => {
+    let sql = "SELECT * FROM usuarios WHERE dni = ?";
+    conexion.query(sql, [req.params.dni], (error, resultados) => {
+        if (error) throw error;
+        res.json(resultados[0]);
+    });
+});
