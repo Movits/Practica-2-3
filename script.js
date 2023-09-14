@@ -1,3 +1,32 @@
+//CONEXION CON BD
+require('dotenv').config();
+const express = require('express');
+const bodyParser = require('body-parser');
+const mysql = require('mysql2');
+
+const app = express();
+
+app.use(bodyParser.json());
+
+// CONFIG DE LA CONEXION
+const conexion = mysql.createConnection({
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASS,
+    database: process.env.DB_NAME
+});
+
+conexion.connect((error) => {
+    if (error) throw error;
+    console.log('Conectado a la base de datos.');
+});
+
+const PUERTO = 3000;
+app.listen(PUERTO, () => {
+    console.log(`Servidor corriendo en el puerto ${PUERTO}.`);
+});
+
+
 //CREATE
 app.post('/agregar', (req, res) => {
     let datos = {nombre: req.body.nombre, email: req.body.email, edad: req.body.edad, pais: req.body.pais};
