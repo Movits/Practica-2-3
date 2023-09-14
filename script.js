@@ -24,3 +24,12 @@ app.get('/usuario/:dni', (req, res) => {
         res.json(resultados[0]);
     });
 });
+
+//UPDATE
+app.put('/actualizar/:dni', (req, res) => {
+    let sql = "UPDATE usuarios SET nombre = ?, email = ?, edad = ?, pais = ? WHERE dni = ?";
+    conexion.query(sql, [req.body.nombre, req.body.email, req.body.edad, req.body.pais, req.params.dni], (error, resultados) => {
+        if (error) throw error;
+        res.json({filasModificadas: resultados.changedRows});
+    });
+});
