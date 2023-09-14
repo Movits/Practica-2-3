@@ -72,3 +72,20 @@ app.delete('/eliminar/:dni', (req, res) => {
     });
 });
 
+// FUNCION PARA INSERIR NUEVO REGISTRO
+const insertarNuevoRegistro = () => {
+    const datos = {
+        nombre: 'Roberto',
+        email: 'robertomovits@gmail.com',
+        edad: 21,
+        pais: 'Brasil'
+    };
+    const sql = "INSERT INTO usuarios SET ?";
+    conexion.query(sql, datos, (error, resultados) => {
+        if (error) throw error;
+        console.log('Registro Insertado:', {dni: resultados.insertId, ...datos});
+        conexion.end();
+    });
+};
+
+insertarNuevoRegistro();
