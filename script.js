@@ -33,3 +33,13 @@ app.put('/actualizar/:dni', (req, res) => {
         res.json({filasModificadas: resultados.changedRows});
     });
 });
+
+//DELETE
+app.delete('/eliminar/:dni', (req, res) => {
+    let sql = "DELETE FROM usuarios WHERE dni = ?";
+    conexion.query(sql, [req.params.dni], (error, resultados) => {
+        if (error) throw error;
+        res.json({filasAfectadas: resultados.affectedRows});
+    });
+});
+
