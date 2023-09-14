@@ -7,3 +7,12 @@ app.post('/agregar', (req, res) => {
         res.json({dni: resultados.insertId, ...datos});
     });
 });
+
+//READ
+app.get('/usuarios', (req, res) => {
+    let sql = "SELECT * FROM usuarios";
+    conexion.query(sql, (error, resultados) => {
+        if (error) throw error;
+        res.json(resultados);
+    });
+});
