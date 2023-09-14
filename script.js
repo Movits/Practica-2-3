@@ -33,7 +33,7 @@ app.post('/agregar', (req, res) => {
     let sql = "INSERT INTO usuarios SET ?";
     conexion.query(sql, datos, (error, resultados) => {
         if (error) throw error;
-        res.json({dni: resultados.insertId, ...datos});
+        res.json({id_usuario: resultados.insertId, ...datos});
     });
 });
 
@@ -46,27 +46,27 @@ app.get('/usuarios', (req, res) => {
     });
 });
 
-app.get('/usuario/:dni', (req, res) => {
-    let sql = "SELECT * FROM usuarios WHERE dni = ?";
-    conexion.query(sql, [req.params.dni], (error, resultados) => {
+app.get('/usuario/:id_usuario', (req, res) => {
+    let sql = "SELECT * FROM usuarios WHERE id_usuario = ?";
+    conexion.query(sql, [req.params.id_usuario], (error, resultados) => {
         if (error) throw error;
         res.json(resultados[0]);
     });
 });
 
 //UPDATE
-app.put('/actualizar/:dni', (req, res) => {
-    let sql = "UPDATE usuarios SET nombre = ?, email = ?, edad = ?, pais = ? WHERE dni = ?";
-    conexion.query(sql, [req.body.nombre, req.body.email, req.body.edad, req.body.pais, req.params.dni], (error, resultados) => {
+app.put('/actualizar/:id_usuario', (req, res) => {
+    let sql = "UPDATE usuarios SET nombre = ?, email = ?, edad = ?, pais = ? WHERE id_usuario = ?";
+    conexion.query(sql, [req.body.nombre, req.body.email, req.body.edad, req.body.pais, req.params.id_usuario], (error, resultados) => {
         if (error) throw error;
         res.json({filasModificadas: resultados.changedRows});
     });
 });
 
 //DELETE
-app.delete('/eliminar/:dni', (req, res) => {
-    let sql = "DELETE FROM usuarios WHERE dni = ?";
-    conexion.query(sql, [req.params.dni], (error, resultados) => {
+app.delete('/eliminar/:id_usuario', (req, res) => {
+    let sql = "DELETE FROM usuarios WHERE id_usuario = ?";
+    conexion.query(sql, [req.params.id_usuario], (error, resultados) => {
         if (error) throw error;
         res.json({filasAfectadas: resultados.affectedRows});
     });
@@ -75,10 +75,10 @@ app.delete('/eliminar/:dni', (req, res) => {
 // FUNCION PARA INSERIR NUEVO REGISTRO
 const insertarNuevoRegistro = () => {
     const datos = {
-        nombre: 'Roberto',
-        email: 'robertomovits@gmail.com',
-        edad: 21,
-        pais: 'Brasil'
+        nombre: 'd',
+        email: 'd@gmail.com',
+        edad: 4,
+        pais: 'Dinamarca'
     };
     const sql = "INSERT INTO usuarios SET ?";
     conexion.query(sql, datos, (error, resultados) => {
